@@ -12,7 +12,7 @@ export default function Imprint() {
         >
           ← Back
         </Link>
-        <h1 className="text-3xl mb-8">Imprint</h1>
+        <h1 className="text-3xl mb-4">Imprint</h1>
         
         <div className="space-y-8 text-sm font-light text-gray-300">
           <section>

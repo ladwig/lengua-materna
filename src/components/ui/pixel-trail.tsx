@@ -15,6 +15,10 @@ interface PixelTrailProps {
   pixelClassName?: string
 }
 
+interface AnimatePixelFunction {
+  __animatePixel?: () => void;
+}
+
 const PixelTrail: React.FC<PixelTrailProps> = ({
   pixelSize = 20,
   fadeDuration = 500,
@@ -36,10 +40,10 @@ const PixelTrail: React.FC<PixelTrailProps> = ({
 
       const pixelElement = document.getElementById(
         `${trailId.current}-pixel-${x}-${y}`
-      )
-      if (pixelElement) {
-        const animatePixel = (pixelElement as any).__animatePixel
-        if (animatePixel) animatePixel()
+      ) as HTMLElement & AnimatePixelFunction
+      
+      if (pixelElement?.__animatePixel) {
+        pixelElement.__animatePixel()
       }
     },
     [pixelSize]
@@ -98,13 +102,13 @@ const PixelDot: React.FC<PixelDotProps> = React.memo(
         opacity: [1, 0],
         transition: { duration: fadeDuration / 1000, delay: delay / 1000 },
       })
-    }, [])
+    }, [controls, fadeDuration, delay])
 
     // Attach the animatePixel function to the DOM element
     const ref = useCallback(
       (node: HTMLDivElement | null) => {
         if (node) {
-          ;(node as any).__animatePixel = animatePixel
+          (node as HTMLElement & AnimatePixelFunction).__animatePixel = animatePixel
         }
       },
       [animatePixel]
