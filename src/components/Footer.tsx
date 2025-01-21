@@ -11,10 +11,12 @@ export default function Footer() {
           <Link href="/imprint" className="text-sm hover:text-gray-400 transition-colors">
             Imprint
           </Link>
-          <a href="#" className="text-sm hover:text-gray-400 transition-colors">
-            Contact
-          </a>
-          <a href="#" className="text-sm hover:text-gray-400 transition-colors">
+          <a 
+            href="https://www.instagram.com/frei.geist/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-sm hover:text-gray-400 transition-colors"
+          >
             Instagram
           </a>
         </div>
