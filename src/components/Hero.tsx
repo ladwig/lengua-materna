@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section className="h-screen w-full bg-black flex items-center justify-center relative">
       <div className="flex flex-col items-center z-10">
-        <h1 className="text-white text-6xl font-bold mb-4">
+        <h1 className="text-white text-6xl mb-4">
           lengua materna
         </h1>
         <p className="text-white text-xl tracking-widest uppercase">
