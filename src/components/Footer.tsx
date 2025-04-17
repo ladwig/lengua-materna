@@ -8,9 +8,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         <p className="text-sm">© {new Date().getFullYear()} lengua materna</p>
         <div className="flex gap-6">
-          <Link href="/imprint" className="text-sm hover:text-gray-400 transition-colors">
-            Imprint
-          </Link>
+
           <a 
             href="https://www.instagram.com/frei.geist/" 
             target="_blank" 
@@ -19,6 +17,17 @@ export default function Footer() {
           >
             Instagram
           </a>
+          <a 
+            href="https://lengua-materna.bandcamp.com/music" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-sm hover:text-gray-400 transition-colors"
+          >
+            Bandcamp
+          </a>
+          <Link href="/imprint" className="text-sm hover:text-gray-400 transition-colors">
+            Imprint
+          </Link>
         </div>
       </div>
     </footer>
