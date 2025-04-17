@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Noise } from '@/components/ui/noise'
 import { PixelTrail } from '@/components/ui/pixel-trail'
 import { MorphingText } from '@/components/ui/morphing-text'
@@ -9,7 +10,12 @@ import Link from 'next/link'
 
 export default function Hero() {
   const screenSize = useScreenSize()
-  
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const translations = [
     "lengua materna",          // Spanish
     "ʟᴇɴɢᴜᴀ ᴍᴀᴛᴇʀɴᴀ",
@@ -45,11 +51,13 @@ export default function Hero() {
   return (
     <section className="min-h-screen w-full bg-black flex flex-col items-center justify-center relative py-12 md:py-24">
       <div className="flex flex-col items-center z-20 px-4 text-center w-full mb-8 md:mb-12">
-        <div className="md:mb-2 w-full">
-          <MorphingText 
-            texts={translations}
-            className="text-white"
-          />
+        <div className="md:mb-2 w-full min-h-[3rem] sm:min-h-[3.5rem] md:min-h-[4rem]">
+          {isMounted && (
+            <MorphingText 
+              texts={translations}
+              className="text-white"
+            />
+          )}
         </div>
         <p className="text-white text-base sm:text-lg md:text-xl tracking-widest uppercase">
           Kill the silence
@@ -57,14 +65,15 @@ export default function Hero() {
       </div>
 
       <div className="z-20 flex justify-center w-full px-4">
-        <Link href="https://lengua-materna.bandcamp.com/album/voyage" target="_blank" rel="noopener noreferrer" className="group block max-w-xs rounded-lg border border-neutral-700 bg-neutral-800/30 p-4 transition-colors hover:border-neutral-500 hover:bg-neutral-700/50">
-          <div className="aspect-square w-full relative mb-3 overflow-hidden rounded">
+        <Link href="https://lengua-materna.bandcamp.com/album/voyage" target="_blank" rel="noopener noreferrer" className="group block max-w-[200px] rounded-lg border border-neutral-700 bg-neutral-800/30 p-4 transition-colors hover:border-neutral-500 hover:bg-neutral-700/50">
+          <div className="aspect-square w-full relative mb-3 overflow-hidden rounded-full bg-black flex items-center justify-center">
             <Image 
               src="/covers/voyage.jpg" 
               alt="Voyage Album Cover" 
-              layout="fill"
+              width={200}
+              height={200}
               objectFit="cover"
-              className="transition-transform duration-300 group-hover:scale-105"
+              className="animate-spin [animation-duration:10s] rounded-full w-[50%] h-[50%] relative"
             />
           </div>
           <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-neutral-300 transition-colors">Voyage</h3>
@@ -77,13 +86,15 @@ export default function Hero() {
         </Link>
       </div>
 
-      <PixelTrail
-        pixelSize={screenSize.lessThan('md') ? 48 : 64}
-        fadeDuration={600}
-        delay={0}
-        className="z-10"
-        pixelClassName="rounded-full bg-purple-500/10"
-      />
+      {isMounted && (
+        <PixelTrail
+          pixelSize={screenSize.lessThan('md') ? 48 : 64}
+          fadeDuration={600}
+          delay={0}
+          className="z-10"
+          pixelClassName="rounded-full bg-neutral-500/5"
+        />
+      )}
       <Noise
         patternSize={75}
         patternScaleX={1}
