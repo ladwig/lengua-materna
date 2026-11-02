@@ -8,6 +8,11 @@ import { useScreenSize } from '@/components/hooks/use-screen-size'
 import Image from 'next/image'
 import Link from 'next/link'
 
+const releases = [
+  { slug: 'control-rhythm', title: 'Control Rhythm', artist: 'Npoint_O', date: 'releases November 27, 2026' },
+  { slug: 'voyage', title: 'Voyage', artist: 'Npoint_O', date: 'released April 28, 2025' },
+]
+
 export default function Hero() {
   const screenSize = useScreenSize()
   const [isMounted, setIsMounted] = useState(false);
@@ -64,26 +69,28 @@ export default function Hero() {
         </p>
       </div>
 
-      <div className="z-20 flex justify-center w-full px-4">
-        <Link href="https://lengua-materna.bandcamp.com/album/voyage" target="_blank" rel="noopener noreferrer" className="group block max-w-[200px] rounded-lg border border-neutral-700 bg-neutral-800/30 p-4 transition-colors hover:border-neutral-500 hover:bg-neutral-700/50">
-          <div className="aspect-square w-full relative mb-3 overflow-hidden rounded-full bg-black flex items-center justify-center">
-            <Image 
-              src="/covers/voyage.jpg" 
-              alt="Voyage Album Cover" 
-              width={200}
-              height={200}
-              objectFit="cover"
-              className="animate-spin [animation-duration:10s] rounded-full w-[50%] h-[50%] relative"
-            />
-          </div>
-          <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-neutral-300 transition-colors">Voyage</h3>
-          <p className="text-sm text-neutral-400">by Npoint_O</p>
-          <p className="text-xs text-neutral-500 mt-2">releases April 28, 2025</p>
-          <div className="flex space-x-2 mt-3">
-            <span className="inline-block bg-neutral-700 rounded px-2 py-0.5 text-xs font-medium text-neutral-300">Digital</span>
-            <span className="inline-block bg-neutral-700 rounded px-2 py-0.5 text-xs font-medium text-neutral-300">Vinyl</span>
-          </div>
-        </Link>
+      <div className="z-20 flex flex-wrap justify-center gap-6 w-full px-4">
+        {releases.map((release) => (
+          <Link key={release.slug} href={`https://lengua-materna.bandcamp.com/album/${release.slug}`} target="_blank" rel="noopener noreferrer" className="group block max-w-[200px] rounded-lg border border-neutral-700 bg-neutral-800/30 p-4 transition-colors hover:border-neutral-500 hover:bg-neutral-700/50">
+            <div className="aspect-square w-full relative mb-3 overflow-hidden rounded-full bg-black flex items-center justify-center">
+              <Image 
+                src={`/covers/${release.slug}.jpg`} 
+                alt={`${release.title} Album Cover`} 
+                width={200}
+                height={200}
+                objectFit="cover"
+                className="animate-spin [animation-duration:10s] rounded-full w-[50%] h-[50%] relative"
+              />
+            </div>
+            <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-neutral-300 transition-colors">{release.title}</h3>
+            <p className="text-sm text-neutral-400">by {release.artist}</p>
+            <p className="text-xs text-neutral-500 mt-2">{release.date}</p>
+            <div className="flex space-x-2 mt-3">
+              <span className="inline-block bg-neutral-700 rounded px-2 py-0.5 text-xs font-medium text-neutral-300">Digital</span>
+              <span className="inline-block bg-neutral-700 rounded px-2 py-0.5 text-xs font-medium text-neutral-300">Vinyl</span>
+            </div>
+          </Link>
+        ))}
       </div>
 
       {isMounted && (
